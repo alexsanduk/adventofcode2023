@@ -5,11 +5,12 @@ def get_matches(win_numbers: List[int], numbers: List[int]) -> int:
     return len(set(win_numbers).intersection(set(numbers)))
 
 
-assert get_matches([1, 2, 3], [1]) == 1
-assert get_matches([1, 2, 3], [4]) == 0
-assert get_matches([1, 2, 3], [1, 2]) == 2
-assert get_matches([1, 2, 3], [1, 2, 3]) == 3
-assert get_matches([1, 2, 3], [1, 2, 2, 3]) == 3
+def test_get_matches():
+    assert get_matches([1, 2, 3], [1]) == 1
+    assert get_matches([1, 2, 3], [4]) == 0
+    assert get_matches([1, 2, 3], [1, 2]) == 2
+    assert get_matches([1, 2, 3], [1, 2, 3]) == 3
+    assert get_matches([1, 2, 3], [1, 2, 2, 3]) == 3
 
 
 def mypower(to: int):
@@ -23,10 +24,11 @@ def mypower(to: int):
         return val * val
 
 
-assert mypower(0) == 1
-assert mypower(1) == 2
-assert mypower(2) == 4
-assert mypower(3) == 8
+def test_mypower():
+    assert mypower(0) == 1
+    assert mypower(1) == 2
+    assert mypower(2) == 4
+    assert mypower(3) == 8
 
 
 def get_points(matches: int) -> int:
@@ -36,10 +38,11 @@ def get_points(matches: int) -> int:
         return mypower(matches - 1)
 
 
-assert get_points(0) == 0
-assert get_points(1) == 1
-assert get_points(2) == 2
-assert get_points(3) == 4
+def test_get_points():
+    assert get_points(0) == 0
+    assert get_points(1) == 1
+    assert get_points(2) == 2
+    assert get_points(3) == 4
 
 
 def parse_line(line: str) -> Tuple[List[int], List[int]]:
@@ -50,12 +53,13 @@ def parse_line(line: str) -> Tuple[List[int], List[int]]:
     return win_numbers, numbers
 
 
-assert parse_line("Card 1: 41 | 83") == ([41], [83])
-assert parse_line("Card 1: 41 24 | 83") == ([41, 24], [83])
-assert parse_line("Card 1: 41 24 | 83 25") == ([41, 24], [83, 25])
+def test_parse_line():
+    assert parse_line("Card 1: 41 | 83") == ([41], [83])
+    assert parse_line("Card 1: 41 24 | 83") == ([41, 24], [83])
+    assert parse_line("Card 1: 41 24 | 83 25") == ([41, 24], [83, 25])
 
 
-def solution(fname: str):
+def solution(fname: str) -> int:
     total_points = 0
     with open(fname) as f:
         for line in f:
@@ -65,4 +69,5 @@ def solution(fname: str):
     return total_points
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

@@ -11,8 +11,9 @@ def read_mapping(
     return mapping
 
 
-assert read_mapping("1 2 3", []) == [(2, 5, -1)]
-assert read_mapping("4 0 2", [(2, 4, -2)]) == [(2, 4, -2), (0, 2, 4)]
+def test_read_mapping():
+    assert read_mapping("1 2 3", []) == [(2, 5, -1)]
+    assert read_mapping("4 0 2", [(2, 4, -2)]) == [(2, 4, -2), (0, 2, 4)]
 
 
 def read_seed_ranges(line: str) -> List[Tuple[int, int]]:
@@ -25,7 +26,8 @@ def read_seed_ranges(line: str) -> List[Tuple[int, int]]:
     return [(seeds[ix], seeds[ix] + seeds[ix + 1]) for ix in range(0, len(seeds), 2)]
 
 
-assert read_seed_ranges("seeds: 79 14 55 13") == [(79, 93), (55, 68)]
+def test_read_seed_ranges():
+    assert read_seed_ranges("seeds: 79 14 55 13") == [(79, 93), (55, 68)]
 
 
 def add_missing_segments(
@@ -41,8 +43,13 @@ def add_missing_segments(
     return mapping
 
 
-assert add_missing_segments([(1, 2, 3)]) == [(1, 2, 3), (0, 1, 0), (2, float("inf"), 0)]
-assert add_missing_segments([]) == [(0, float("inf"), 0)]
+def test_add_missing_segments():
+    assert add_missing_segments([(1, 2, 3)]) == [
+        (1, 2, 3),
+        (0, 1, 0),
+        (2, sys.maxsize, 0),
+    ]
+    assert add_missing_segments([]) == [(0, sys.maxsize, 0)]
 
 
 def get_overlap(
@@ -54,10 +61,11 @@ def get_overlap(
     return
 
 
-assert get_overlap((1, 3), (2, 4)) == (2, 3)
-assert get_overlap((1, 3), (3, 4)) is None
-assert get_overlap((1, 3), (2, 3)) == (2, 3)
-assert get_overlap((1, 4), (2, 3)) == (2, 3)
+def test_get_overlap():
+    assert get_overlap((1, 3), (2, 4)) == (2, 3)
+    assert get_overlap((1, 3), (3, 4)) is None
+    assert get_overlap((1, 3), (2, 3)) == (2, 3)
+    assert get_overlap((1, 4), (2, 3)) == (2, 3)
 
 
 def map_segment(
@@ -71,11 +79,12 @@ def map_segment(
     return new_ranges
 
 
-assert map_segment((1, 2), [(0, 1, 0), (1, 2, 1), (2, 5, 10)]) == [(2, 3)]
-assert map_segment((1, 3), [(0, 1, 0), (1, 2, 1), (2, 5, 10)]) == [
-    (2, 3),
-    (12, 13),
-]
+def test_map_segment():
+    assert map_segment((1, 2), [(0, 1, 0), (1, 2, 1), (2, 5, 10)]) == [(2, 3)]
+    assert map_segment((1, 3), [(0, 1, 0), (1, 2, 1), (2, 5, 10)]) == [
+        (2, 3),
+        (12, 13),
+    ]
 
 
 def map_seed_ranges(
@@ -123,4 +132,5 @@ def solution(fname: str) -> int:
     return min(location_ranges)[0]
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

@@ -5,11 +5,12 @@ def get_matches(win_numbers: List[int], numbers: List[int]) -> int:
     return len(set(win_numbers).intersection(set(numbers)))
 
 
-assert get_matches([1, 2, 3], [1]) == 1
-assert get_matches([1, 2, 3], [4]) == 0
-assert get_matches([1, 2, 3], [1, 2]) == 2
-assert get_matches([1, 2, 3], [1, 2, 3]) == 3
-assert get_matches([1, 2, 3], [1, 2, 2, 3]) == 3
+def test_get_matches():
+    assert get_matches([1, 2, 3], [1]) == 1
+    assert get_matches([1, 2, 3], [4]) == 0
+    assert get_matches([1, 2, 3], [1, 2]) == 2
+    assert get_matches([1, 2, 3], [1, 2, 3]) == 3
+    assert get_matches([1, 2, 3], [1, 2, 2, 3]) == 3
 
 
 def update_cards(matches: List[int], cards: List[int]) -> List[int]:
@@ -20,9 +21,10 @@ def update_cards(matches: List[int], cards: List[int]) -> List[int]:
     return cards
 
 
-assert update_cards([0], [1]) == [1]
-assert update_cards([1, 0], [1, 1]) == [2, 1]
-assert update_cards([1, 1, 1], [1, 1, 1]) == [3, 2, 1]
+def test_update_cards():
+    assert update_cards([0], [1]) == [1]
+    assert update_cards([1, 0], [1, 1]) == [2, 1]
+    assert update_cards([1, 1, 1], [1, 1, 1]) == [3, 2, 1]
 
 
 def parse_line(line: str) -> Tuple[List[int], List[int]]:
@@ -33,9 +35,10 @@ def parse_line(line: str) -> Tuple[List[int], List[int]]:
     return win_numbers, numbers
 
 
-assert parse_line("Card 1: 41 | 83") == ([41], [83])
-assert parse_line("Card 1: 41 24 | 83") == ([41, 24], [83])
-assert parse_line("Card 1: 41 24 | 83 25") == ([41, 24], [83, 25])
+def test_parse_line():
+    assert parse_line("Card 1: 41 | 83") == ([41], [83])
+    assert parse_line("Card 1: 41 24 | 83") == ([41, 24], [83])
+    assert parse_line("Card 1: 41 24 | 83 25") == ([41, 24], [83, 25])
 
 
 def solution(fname: str) -> int:
@@ -49,4 +52,5 @@ def solution(fname: str) -> int:
     return sum(cards)
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

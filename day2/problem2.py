@@ -13,9 +13,10 @@ def get_set_colors(s) -> Dict[str, int]:
     return d
 
 
-assert get_set_colors("3 blue") == {"blue": 3}
-assert get_set_colors("3 blue, 4 red") == {"red": 4, "blue": 3}
-assert get_set_colors("3 blue, 4 red, 5 green") == {"red": 4, "blue": 3, "green": 5}
+def test_get_set_colors():
+    assert get_set_colors("3 blue") == {"blue": 3}
+    assert get_set_colors("3 blue, 4 red") == {"red": 4, "blue": 3}
+    assert get_set_colors("3 blue, 4 red, 5 green") == {"red": 4, "blue": 3, "green": 5}
 
 
 def update_colors(colors: Dict[str, int], new_colors: Dict[str, int]) -> Dict[str, int]:
@@ -27,9 +28,16 @@ def update_colors(colors: Dict[str, int], new_colors: Dict[str, int]) -> Dict[st
     return colors
 
 
-assert update_colors({"green": 7}, {"blue": 10, "green": 5}) == {"green": 7, "blue": 10}
-assert update_colors({"green": 4}, {"blue": 10, "green": 5}) == {"green": 5, "blue": 10}
-assert update_colors({"green": 4}, {"blue": 10}) == {"green": 4, "blue": 10}
+def test_update_colors():
+    assert update_colors({"green": 7}, {"blue": 10, "green": 5}) == {
+        "green": 7,
+        "blue": 10,
+    }
+    assert update_colors({"green": 4}, {"blue": 10, "green": 5}) == {
+        "green": 5,
+        "blue": 10,
+    }
+    assert update_colors({"green": 4}, {"blue": 10}) == {"green": 4, "blue": 10}
 
 
 def get_game_min_colors(sets) -> Dict[str, int]:
@@ -41,18 +49,19 @@ def get_game_min_colors(sets) -> Dict[str, int]:
     return colors
 
 
-assert get_game_min_colors("3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green") == {
-    "blue": 6,
-    "green": 2,
-    "red": 4,
-}
-assert get_game_min_colors(
-    "1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue"
-) == {
-    "blue": 4,
-    "green": 3,
-    "red": 1,
-}
+def test_get_game_min_colors():
+    assert get_game_min_colors("3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green") == {
+        "blue": 6,
+        "green": 2,
+        "red": 4,
+    }
+    assert get_game_min_colors(
+        "1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue"
+    ) == {
+        "blue": 4,
+        "green": 3,
+        "red": 1,
+    }
 
 
 def mypower(colors: Dict[str, int]) -> int:
@@ -62,12 +71,13 @@ def mypower(colors: Dict[str, int]) -> int:
     return power
 
 
-assert mypower({"blue": 10}) == 10
-assert mypower({"blue": 10, "green": 2}) == 20
-assert mypower({"blue": 10, "green": 2, "red": 5}) == 100
+def test_mypower():
+    assert mypower({"blue": 10}) == 10
+    assert mypower({"blue": 10, "green": 2}) == 20
+    assert mypower({"blue": 10, "green": 2, "red": 5}) == 100
 
 
-def solution(input_file):
+def solution(input_file) -> int:
     sum_powers = 0
     with open(input_file) as f:
         for line in f:
@@ -77,4 +87,5 @@ def solution(input_file):
     return sum_powers
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

@@ -8,9 +8,10 @@ def check_all_equal(vals: List[int], left: int, right: int) -> bool:
     return True
 
 
-assert check_all_equal([1, 2], 0, 1)
-assert check_all_equal([1, 2, 2], 1, 3)
-assert not check_all_equal([1, 1, 2], 0, 3)
+def test_check_all_equal():
+    assert check_all_equal([1, 2], 0, 1)
+    assert check_all_equal([1, 2, 2], 1, 3)
+    assert not check_all_equal([1, 1, 2], 0, 3)
 
 
 # 45 30 21 16 13 10
@@ -22,7 +23,7 @@ assert not check_all_equal([1, 1, 2], 0, 3)
 # 45 30 21 16 13 10 5
 
 
-def predict_next_value(vals: List[int]) -> int:
+def predict_previous_value(vals: List[int]) -> int:
     vals.reverse()
     shift = 0
     # go down
@@ -38,7 +39,8 @@ def predict_next_value(vals: List[int]) -> int:
     return vals[len(vals) - 1]
 
 
-assert predict_next_value([10, 13, 16, 21, 30, 45]) == 5
+def test_predict_previous_value():
+    assert predict_previous_value([10, 13, 16, 21, 30, 45]) == 5
 
 
 def solution(fname: str) -> int:
@@ -46,8 +48,9 @@ def solution(fname: str) -> int:
     with open(fname) as f:
         for line in f:
             vals = list(map(int, line.split(" ")))
-            s += predict_next_value(vals)
+            s += predict_previous_value(vals)
     return s
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

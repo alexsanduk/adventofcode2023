@@ -14,11 +14,12 @@ def build_tree(line, tree: Dict[str, Tuple[str, str]]) -> Dict[str, Tuple[str, s
     return tree
 
 
-assert build_tree("AAA = (BBB, CCC)", dict()) == {"AAA": ("BBB", "CCC")}
-assert build_tree("AAA = (BBB, CCC)", {"BBB": ("CCC", "ZZZ")}) == {
-    "AAA": ("BBB", "CCC"),
-    "BBB": ("CCC", "ZZZ"),
-}
+def test_build_tree():
+    assert build_tree("AAA = (BBB, CCC)", dict()) == {"AAA": ("BBB", "CCC")}
+    assert build_tree("AAA = (BBB, CCC)", {"BBB": ("CCC", "ZZZ")}) == {
+        "AAA": ("BBB", "CCC"),
+        "BBB": ("CCC", "ZZZ"),
+    }
 
 
 def get_num_steps(tree: Dict[str, Tuple[str, str]], instructions: str) -> int:
@@ -48,4 +49,5 @@ def solution(fname: str) -> int:
     return get_num_steps(tree, instructions)
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

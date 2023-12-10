@@ -15,13 +15,13 @@ def get_number(s: str) -> int:
     return int(first_digit + last_digit)
 
 
-def solution(input_file: str):
+def solution(input_file: str) -> int:
     s = 0
     with open(input_file) as f:
         for line in f:
             s += get_number(line)
-    print(s)
+    return s
 
 
 if __name__ == "__main__":
-    solution(sys.argv[1])
+    print(solution(sys.argv[1]))

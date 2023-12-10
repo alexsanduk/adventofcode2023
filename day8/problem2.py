@@ -15,11 +15,12 @@ def build_tree(line, tree: Dict[str, Tuple[str, str]]) -> Dict[str, Tuple[str, s
     return tree
 
 
-assert build_tree("AAA = (BBB, CCC)", dict()) == {"AAA": ("BBB", "CCC")}
-assert build_tree("AAA = (BBB, CCC)", {"BBB": ("CCC", "ZZZ")}) == {
-    "AAA": ("BBB", "CCC"),
-    "BBB": ("CCC", "ZZZ"),
-}
+def test_build_tree():
+    assert build_tree("AAA = (BBB, CCC)", dict()) == {"AAA": ("BBB", "CCC")}
+    assert build_tree("AAA = (BBB, CCC)", {"BBB": ("CCC", "ZZZ")}) == {
+        "AAA": ("BBB", "CCC"),
+        "BBB": ("CCC", "ZZZ"),
+    }
 
 
 def greatest_common_divisor(a: int, b: int) -> int:
@@ -29,8 +30,9 @@ def greatest_common_divisor(a: int, b: int) -> int:
     return a
 
 
-assert greatest_common_divisor(1, 16) == 1
-assert greatest_common_divisor(12, 16) == 4
+def test_greatest_common_divisor():
+    assert greatest_common_divisor(1, 16) == 1
+    assert greatest_common_divisor(12, 16) == 4
 
 
 def least_common_denominator(a: int, b: int) -> int:
@@ -38,7 +40,8 @@ def least_common_denominator(a: int, b: int) -> int:
     return (a * b) // g
 
 
-assert least_common_denominator(4, 8) == 8
+def test_least_common_denominator():
+    assert least_common_denominator(4, 8) == 8
 
 
 def least_common_denominator_list(vals: List[int]) -> int:
@@ -48,8 +51,9 @@ def least_common_denominator_list(vals: List[int]) -> int:
     return lcm
 
 
-assert least_common_denominator_list([1, 4, 6]) == 12
-assert least_common_denominator_list([2, 4]) == 4
+def test_least_common_denominator_list():
+    assert least_common_denominator_list([1, 4, 6]) == 12
+    assert least_common_denominator_list([2, 4]) == 4
 
 
 def get_num_steps(
@@ -100,4 +104,5 @@ def solution(fname: str) -> int:
     return least_common_denominator_list(cycles)
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

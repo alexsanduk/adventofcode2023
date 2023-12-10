@@ -1,8 +1,3 @@
-# numbers = [(467, 0, 2)]
-# symbols = [(1, 3)]
-# for s in symbols find numbers in
-# (0, 2) intersects with (2, 4)
-#
 from collections import defaultdict
 from typing import List, Tuple, Dict
 
@@ -33,14 +28,15 @@ def read_line(
     return (numbers, symbols)
 
 
-assert read_line(0, "467..114.*", defaultdict(list), []) == (
-    {0: [(467, 0, 2), (114, 5, 7)]},
-    [(0, 9)],
-)
-assert read_line(0, ".467..114.1", defaultdict(list), []) == (
-    {0: [(467, 1, 3), (114, 6, 8), (1, 10, 10)]},
-    [],
-)
+def test_read_line():
+    assert read_line(0, "467..114.*", defaultdict(list), []) == (
+        {0: [(467, 0, 2), (114, 5, 7)]},
+        [(0, 9)],
+    )
+    assert read_line(0, ".467..114.1", defaultdict(list), []) == (
+        {0: [(467, 1, 3), (114, 6, 8), (1, 10, 10)]},
+        [],
+    )
 
 
 def has_intersection(segment1: Tuple[int, int], segment2: Tuple[int, int]) -> bool:
@@ -48,12 +44,13 @@ def has_intersection(segment1: Tuple[int, int], segment2: Tuple[int, int]) -> bo
     return segment2[0] <= segment1[1]
 
 
-assert has_intersection((0, 2), (2, 4))
-assert has_intersection((2, 4), (0, 2))
-assert not has_intersection((0, 2), (5, 7))
-assert not has_intersection((5, 7), (0, 2))
-assert has_intersection((1, 7), (2, 4))
-assert has_intersection((2, 4), (1, 7))
+def test_has_intersection():
+    assert has_intersection((0, 2), (2, 4))
+    assert has_intersection((2, 4), (0, 2))
+    assert not has_intersection((0, 2), (5, 7))
+    assert not has_intersection((5, 7), (0, 2))
+    assert has_intersection((1, 7), (2, 4))
+    assert has_intersection((2, 4), (1, 7))
 
 
 def find_neighbors(
@@ -69,14 +66,15 @@ def find_neighbors(
     return total_sum
 
 
-assert find_neighbors({0: [(467, 0, 2)], 1: [], 2: [(35, 2, 4)]}, [(0, 3)]) == 467
-assert find_neighbors({0: [(467, 0, 2)], 1: [], 2: [(35, 2, 4)]}, [(1, 0)]) == 467
-assert find_neighbors({0: [(467, 0, 2)], 1: [], 2: [(35, 2, 4)]}, [(2, 0)]) == 0
-assert find_neighbors({0: [(467, 0, 2)], 1: [], 2: [(35, 2, 4)]}, [(1, 2)]) == 502
-assert find_neighbors({0: [(467, 0, 2)], 1: [], 2: [(35, 2, 4)]}, [(1, 1)]) == 502
+def test_find_neighbors():
+    assert find_neighbors({0: [(467, 0, 2)], 1: [], 2: [(35, 2, 4)]}, [(0, 3)]) == 467
+    assert find_neighbors({0: [(467, 0, 2)], 1: [], 2: [(35, 2, 4)]}, [(1, 0)]) == 467
+    assert find_neighbors({0: [(467, 0, 2)], 1: [], 2: [(35, 2, 4)]}, [(2, 0)]) == 0
+    assert find_neighbors({0: [(467, 0, 2)], 1: [], 2: [(35, 2, 4)]}, [(1, 2)]) == 502
+    assert find_neighbors({0: [(467, 0, 2)], 1: [], 2: [(35, 2, 4)]}, [(1, 1)]) == 502
 
 
-def solution(fname: str):
+def solution(fname: str) -> int:
     symbols = []
     numbers = defaultdict(list)
     with open(fname) as f:
@@ -87,4 +85,5 @@ def solution(fname: str):
     return find_neighbors(numbers, symbols)
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

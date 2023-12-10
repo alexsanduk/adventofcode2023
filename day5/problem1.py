@@ -10,8 +10,9 @@ def read_mapping(
     return mapping
 
 
-assert read_mapping("1 2 3", []) == [(2, 5, -1)]
-assert read_mapping("4 0 2", [(2, 4, -2)]) == [(2, 4, -2), (0, 2, 4)]
+def test_read_mapping():
+    assert read_mapping("1 2 3", []) == [(2, 5, -1)]
+    assert read_mapping("4 0 2", [(2, 4, -2)]) == [(2, 4, -2), (0, 2, 4)]
 
 
 def read_seeds(line: str) -> List[int]:
@@ -24,8 +25,9 @@ def read_seeds(line: str) -> List[int]:
     return seeds
 
 
-assert read_seeds("seeds: 79 14 55 13") == [79, 14, 55, 13]
-assert read_seeds("seeds: 79") == [79]
+def test_read_seeds():
+    assert read_seeds("seeds: 79 14 55 13") == [79, 14, 55, 13]
+    assert read_seeds("seeds: 79") == [79]
 
 
 def map_number(num: int, mapping: List[Tuple[int, int, int]]) -> int:
@@ -35,9 +37,10 @@ def map_number(num: int, mapping: List[Tuple[int, int, int]]) -> int:
     return num
 
 
-assert map_number(1, [(1, 3, 5)]) == 6
-assert map_number(2, [(1, 3, 5)]) == 7
-assert map_number(0, [(1, 3, 5)]) == 0
+def test_map_number():
+    assert map_number(1, [(1, 3, 5)]) == 6
+    assert map_number(2, [(1, 3, 5)]) == 7
+    assert map_number(0, [(1, 3, 5)]) == 0
 
 
 def get_locations(
@@ -61,18 +64,19 @@ def get_locations(
     return locations
 
 
-assert get_locations(
-    [0],
-    {
-        ("seed", "soil"): [(0, 1, 1)],
-        ("soil", "fertilizer"): [(1, 2, 1)],
-        ("fertilizer", "water"): [(2, 3, 1)],
-        ("water", "light"): [(3, 4, 1)],
-        ("light", "temperature"): [(4, 5, 1)],
-        ("temperature", "humidity"): [(5, 6, 1)],
-        ("humidity", "location"): [(6, 7, 1)],
-    },
-) == [7]
+def test_get_locations():
+    assert get_locations(
+        [0],
+        {
+            ("seed", "soil"): [(0, 1, 1)],
+            ("soil", "fertilizer"): [(1, 2, 1)],
+            ("fertilizer", "water"): [(2, 3, 1)],
+            ("water", "light"): [(3, 4, 1)],
+            ("light", "temperature"): [(4, 5, 1)],
+            ("temperature", "humidity"): [(5, 6, 1)],
+            ("humidity", "location"): [(6, 7, 1)],
+        },
+    ) == [7]
 
 
 def solution(fname: str) -> int:
@@ -94,4 +98,5 @@ def solution(fname: str) -> int:
     return min(locations)
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

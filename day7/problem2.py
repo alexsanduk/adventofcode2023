@@ -38,8 +38,9 @@ def map_hand(s: str) -> Hand:
     )
 
 
-assert map_hand("AAAAA") == (14, 14, 14, 14, 14)
-assert map_hand("AA8AA") == (14, 14, 8, 14, 14)
+def test_map_hand():
+    assert map_hand("AAAAA") == (14, 14, 14, 14, 14)
+    assert map_hand("AA8AA") == (14, 14, 8, 14, 14)
 
 
 @map_jokers_decorator
@@ -48,9 +49,10 @@ def is_five_kind(p: Hand) -> bool:
     return count.most_common(1)[0][1] == 5
 
 
-assert is_five_kind((14, 14, 14, 14, 14))
-assert is_five_kind((1, 14, 14, 14, 14))
-assert not is_five_kind((14, 14, 14, 14, 8))
+def test_is_five_kind():
+    assert is_five_kind((14, 14, 14, 14, 14))
+    assert is_five_kind((1, 14, 14, 14, 14))
+    assert not is_five_kind((14, 14, 14, 14, 8))
 
 
 @map_jokers_decorator
@@ -59,10 +61,11 @@ def is_four_kind(p: Hand) -> bool:
     return count.most_common(1)[0][1] == 4
 
 
-assert is_four_kind((14, 14, 14, 14, 9))
-assert not is_four_kind((14, 14, 14, 8, 9))
-assert not is_four_kind((14, 14, 14, 14, 14))
-assert is_four_kind((14, 1, 8, 14, 14))
+def test_is_four_kind():
+    assert is_four_kind((14, 14, 14, 14, 9))
+    assert not is_four_kind((14, 14, 14, 8, 9))
+    assert not is_four_kind((14, 14, 14, 14, 14))
+    assert is_four_kind((14, 1, 8, 14, 14))
 
 
 @map_jokers_decorator
@@ -74,11 +77,12 @@ def is_full_house(p: Hand) -> bool:
     return t1[1] == 3 and t2[1] == 2
 
 
-assert is_full_house((14, 14, 14, 13, 13))
-assert not is_full_house((14, 14, 14, 8, 9))
-assert not is_full_house((14, 14, 14, 14, 14))
-assert not is_full_house((14, 14, 14, 14, 14))
-assert is_full_house((14, 14, 1, 8, 8))
+def test_is_full_house():
+    assert is_full_house((14, 14, 14, 13, 13))
+    assert not is_full_house((14, 14, 14, 8, 9))
+    assert not is_full_house((14, 14, 14, 14, 14))
+    assert not is_full_house((14, 14, 14, 14, 14))
+    assert is_full_house((14, 14, 1, 8, 8))
 
 
 @map_jokers_decorator
@@ -90,10 +94,11 @@ def is_three_kind(p: Hand) -> bool:
     return t1[1] == 3 and t2[1] == 1
 
 
-assert not is_three_kind((14, 14, 14, 13, 13))
-assert is_three_kind((14, 14, 14, 8, 9))
-assert not is_three_kind((14, 14, 14, 14, 14))
-assert is_three_kind((14, 14, 1, 8, 9))
+def test_is_three_kind():
+    assert not is_three_kind((14, 14, 14, 13, 13))
+    assert is_three_kind((14, 14, 14, 8, 9))
+    assert not is_three_kind((14, 14, 14, 14, 14))
+    assert is_three_kind((14, 14, 1, 8, 9))
 
 
 @map_jokers_decorator
@@ -105,9 +110,10 @@ def is_two_pair(p: Hand) -> bool:
     return t1[1] == 2 and t2[1] == 2
 
 
-assert is_two_pair((13, 14, 14, 13, 12))
-assert not is_two_pair((14, 14, 14, 13, 12))
-assert not is_two_pair((14, 14, 14, 14, 14))
+def test_is_two_pair():
+    assert is_two_pair((13, 14, 14, 13, 12))
+    assert not is_two_pair((14, 14, 14, 13, 12))
+    assert not is_two_pair((14, 14, 14, 14, 14))
 
 
 @map_jokers_decorator
@@ -119,10 +125,11 @@ def is_one_pair(p: Hand) -> bool:
     return t1[1] == 2 and t2[1] == 1
 
 
-assert is_one_pair((2, 3, 2, 4, 5))
-assert not is_one_pair((2, 3, 2, 3, 5))
-assert not is_one_pair((14, 14, 14, 14, 14))
-assert is_one_pair((2, 1, 3, 4, 5))
+def test_is_one_pair():
+    assert is_one_pair((2, 3, 2, 4, 5))
+    assert not is_one_pair((2, 3, 2, 3, 5))
+    assert not is_one_pair((14, 14, 14, 14, 14))
+    assert is_one_pair((2, 1, 3, 4, 5))
 
 
 @map_jokers_decorator
@@ -131,10 +138,11 @@ def is_high_card(p: Hand) -> bool:
     return count.most_common(1)[0][1] == 1
 
 
-assert is_high_card((14, 13, 12, 11, 10))
-assert not is_high_card((14, 13, 10, 11, 10))
-assert not is_high_card((14, 14, 14, 14, 14))
-assert not is_high_card((14, 1, 12, 11, 10))
+def test_is_high_card():
+    assert is_high_card((14, 13, 12, 11, 10))
+    assert not is_high_card((14, 13, 10, 11, 10))
+    assert not is_high_card((14, 14, 14, 14, 14))
+    assert not is_high_card((14, 1, 12, 11, 10))
 
 
 def solution(fname: str) -> int:
@@ -165,4 +173,5 @@ def solution(fname: str) -> int:
     return total_winnings
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

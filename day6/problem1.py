@@ -6,8 +6,9 @@ def is_valid_speed(speed, total_time, max_distance) -> bool:
     return (total_time - speed) * speed > max_distance
 
 
-assert not is_valid_speed(0, 1, 1)
-assert is_valid_speed(1, 3, 1)
+def test_is_valid_speed():
+    assert not is_valid_speed(0, 1, 1)
+    assert is_valid_speed(1, 3, 1)
 
 
 def count_all_valid_speed(total_time, max_distance) -> int:
@@ -18,15 +19,17 @@ def count_all_valid_speed(total_time, max_distance) -> int:
     return count
 
 
-assert count_all_valid_speed(7, 9) == 4
-assert count_all_valid_speed(15, 40) == 8
+def test_count_all_valid_speed():
+    assert count_all_valid_speed(7, 9) == 4
+    assert count_all_valid_speed(15, 40) == 8
 
 
 def read_numbers(line: str) -> List[int]:
     return list(map(int, re.findall(r"\d+", line)))
 
 
-assert read_numbers("Time:      7  15   30") == [7, 15, 30]
+def test_read_numbers():
+    assert read_numbers("Time:      7  15   30") == [7, 15, 30]
 
 
 def solution(fname: str) -> int:
@@ -39,4 +42,5 @@ def solution(fname: str) -> int:
     return product
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))

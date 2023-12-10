@@ -5,16 +5,18 @@ def is_valid_speed(speed, total_time, max_distance) -> bool:
     return (total_time - speed) * speed > max_distance
 
 
-assert not is_valid_speed(0, 1, 1)
-assert is_valid_speed(1, 3, 1)
+def test_is_valid_speed():
+    assert not is_valid_speed(0, 1, 1)
+    assert is_valid_speed(1, 3, 1)
 
 
 def read_number(line: str) -> int:
     return int("".join(re.findall(r"\d+", line)))
 
 
-assert read_number("Time:      7  15   30") == 71530
-assert read_number("Time:      7") == 7
+def test_read_number():
+    assert read_number("Time:      7  15   30") == 71530
+    assert read_number("Time:      7") == 7
 
 
 def find_good_speed(total_time: int, max_distance: int, left: int, right: int) -> int:
@@ -30,7 +32,8 @@ def find_good_speed(total_time: int, max_distance: int, left: int, right: int) -
     return -1
 
 
-assert find_good_speed(7, 9, 0, 7) == 3
+def test_find_good_speed():
+    assert find_good_speed(7, 9, 0, 7) == 3
 
 
 def find_most_left(total_time: int, max_distance: int, left: int, right: int) -> int:
@@ -43,7 +46,8 @@ def find_most_left(total_time: int, max_distance: int, left: int, right: int) ->
     return left
 
 
-assert find_most_left(7, 9, 0, 3) == 2
+def test_find_most_left():
+    assert find_most_left(7, 9, 0, 3) == 2
 
 
 def find_most_right(total_time: int, max_distance: int, left: int, right: int) -> int:
@@ -56,7 +60,8 @@ def find_most_right(total_time: int, max_distance: int, left: int, right: int) -
     return left - 1
 
 
-assert find_most_right(7, 9, 3, 7) == 5
+def test_find_most_right():
+    assert find_most_right(7, 9, 3, 7) == 5
 
 
 def solution(fname: str) -> int:
@@ -69,4 +74,5 @@ def solution(fname: str) -> int:
     return most_right - most_left + 1
 
 
-print(solution("./input.txt"))
+if __name__ == "__main__":
+    print(solution("./input.txt"))
