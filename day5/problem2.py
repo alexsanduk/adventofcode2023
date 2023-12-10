@@ -1,5 +1,6 @@
 from typing import List, Dict, Tuple, Union
 import re
+import sys
 
 
 def read_mapping(
@@ -36,7 +37,7 @@ def add_missing_segments(
         if end != left:
             mapping.append((end, left, 0))
         end = right
-    mapping.append((end, float("inf"), 0))
+    mapping.append((end, sys.maxsize, 0))
     return mapping
 
 
@@ -78,7 +79,7 @@ assert map_segment((1, 3), [(0, 1, 0), (1, 2, 1), (2, 5, 10)]) == [
 
 
 def map_seed_ranges(
-    mapping: Dict[Tuple[str, str], Tuple[int, int, int]],
+    mapping: Dict[Tuple[str, str], List[Tuple[int, int, int]]],
     seed_ranges: List[Tuple[int, int]],
 ) -> List[Tuple[int, int]]:
     source_dest_cats = [
