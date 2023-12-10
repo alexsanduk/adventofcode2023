@@ -12,6 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Install poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
@@ -20,6 +23,6 @@ jobs:
       - name: Install dependencies with poetry
         run: poetry install
       - name: Lint with pyright
-        run: pyright
+        run: poetry run pyright
       - name: Test with pytest
-        run: pytest
+        run: poetry run pytest
